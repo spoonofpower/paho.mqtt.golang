@@ -16,21 +16,27 @@ package mqtt
 
 import (
 	"io/ioutil"
-	"log"
+
+	"github.com/Sirupsen/logrus"
 )
 
 // Internal levels of library output that are initialised to not print
 // anything but can be overridden by programmer
 var (
-	ERROR    *log.Logger
-	CRITICAL *log.Logger
-	WARN     *log.Logger
-	DEBUG    *log.Logger
+	ERROR    *logrus.Logger
+	CRITICAL *logrus.Logger
+	WARN     *logrus.Logger
+	DEBUG    *logrus.Logger
 )
 
 func init() {
-	ERROR = log.New(ioutil.Discard, "", 0)
-	CRITICAL = log.New(ioutil.Discard, "", 0)
-	WARN = log.New(ioutil.Discard, "", 0)
-	DEBUG = log.New(ioutil.Discard, "", 0)
+
+	logger := &logrus.Logger{
+		Out: ioutil.Discard,
+	}
+
+	ERROR = logger
+	CRITICAL = logger
+	WARN = logger
+	DEBUG = logger
 }
