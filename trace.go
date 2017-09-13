@@ -23,10 +23,10 @@ import (
 // Internal levels of library output that are initialised to not print
 // anything but can be overridden by programmer
 var (
-	ERROR    *logrus.Logger
-	CRITICAL *logrus.Logger
-	WARN     *logrus.Logger
-	DEBUG    *logrus.Logger
+	ERROR    *logrus.Entry
+	CRITICAL *logrus.Entry
+	WARN     *logrus.Entry
+	DEBUG    *logrus.Entry
 )
 
 func init() {
@@ -35,8 +35,8 @@ func init() {
 		Out: ioutil.Discard,
 	}
 
-	ERROR = logger
-	CRITICAL = logger
-	WARN = logger
-	DEBUG = logger
+	ERROR = logger.WithField("level", "error")
+	CRITICAL = logger.WithField("level", "crit")
+	WARN = logger.WithField("level", "warn")
+	DEBUG = logger.WithField("level", "debug")
 }
